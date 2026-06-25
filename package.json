@@ -1,0 +1,10 @@
+{
+  "name": "api_pagamentos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "API de pagamentos em PHP para atividade de microsservicos.",
+  "scripts": {
+    "start": "php -S localhost:8000"
+  },
+  "dependencies": {}
+}
