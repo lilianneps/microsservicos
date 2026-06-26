@@ -1,22 +1,14 @@
 {
     "pagamento": [
         {
-            "id": 1,
-            "pedido": 1,
-            "nome_cliente": "Joao Silva",
-            "forma_pagamento": "pix",
-            "valor": 25.9,
-            "status": "aprovado",
-            "data_pagamento": "2026-06-22T08:00:00-03:00"
-        },
-        {
             "id": 2,
             "pedido": 1,
-            "nome_cliente": "lili",
-            "forma_pagamento": "pix",
-            "valor": 100,
+            "nome_cliente": "Joao Silva Sauro",
+            "forma_pagamento": "cartao",
+            "valor": 30,
             "status": "aprovado",
-            "data_pagamento": "2026-06-22T09:03:40-03:00"
+            "data_pagamento": "2026-06-22T09:03:40-03:00",
+            "atualizado_em": "2026-06-25T22:56:22-03:00"
         },
         {
             "id": 3,
@@ -295,7 +287,17 @@
             "forma_pagamento": "pix",
             "valor": 39.9,
             "status": "aprovado",
-            "data_pagamento": "2026-06-23T22:15:49-03:00"
+            "data_pagamento": "2026-06-23T22:15:49-03:00",
+            "atualizado_em": "2026-06-25T22:55:06-03:00"
+        },
+        {
+            "id": 34,
+            "pedido": 15234,
+            "nome_cliente": "Joao da Silva",
+            "forma_pagamento": "pix",
+            "valor": 30.9,
+            "status": "aprovado",
+            "data_pagamento": "2026-06-25T22:52:36-03:00"
         }
     ]
 }

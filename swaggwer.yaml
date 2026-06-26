@@ -1,0 +1,334 @@
+openapi: 3.0.0
+
+info:
+  title: API de Pagamentos
+  description: API para gerenciamento de pagamentos do projeto Lili pay
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8000
+  - url: http://localhost/microsservicos
+
+paths:
+
+  /index.php/pagamentos:
+    get:
+      summary: Lista todos os pagamentos
+
+      responses:
+        '200':
+          description: Sucesso
+
+          content:
+            application/json:
+              schema:
+                type: object
+
+                properties:
+                  pagamento:
+                    type: array
+
+                    items:
+                      $ref: '#/components/schemas/Pagamento'
+
+    post:
+
+      summary: Cadastra um pagamento
+
+      requestBody:
+
+        required: true
+
+        content:
+
+          application/json:
+
+            schema:
+
+              $ref: '#/components/schemas/PagamentoEntrada'
+
+      responses:
+
+        '201':
+          description: Pagamento criado com sucesso
+
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pagamento'
+
+        '422':
+          description: Dados invalidos
+
+  /index.php/pagamentos/{id}:
+    get:
+
+      summary: Busca pagamento por ID
+
+      parameters:
+
+        - name: id
+          in: path
+          required: true
+
+          schema:
+            type: integer
+
+      responses:
+
+        '200':
+          description: Pagamento encontrado
+
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pagamento'
+
+        '404':
+          description: Pagamento nao encontrado
+
+    put:
+
+      summary: Atualiza um pagamento
+
+      parameters:
+
+        - name: id
+          in: path
+          required: true
+
+          schema:
+            type: integer
+
+      requestBody:
+
+        required: true
+
+        content:
+
+          application/json:
+
+            schema:
+
+              $ref: '#/components/schemas/PagamentoAtualizacao'
+
+      responses:
+
+        '200':
+          description: Pagamento atualizado
+
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pagamento'
+
+        '400':
+          description: ID do pagamento nao informado
+
+        '404':
+          description: Pagamento nao encontrado
+
+    patch:
+
+      summary: Atualiza parcialmente um pagamento
+
+      parameters:
+
+        - name: id
+          in: path
+          required: true
+
+          schema:
+            type: integer
+
+      requestBody:
+
+        required: true
+
+        content:
+
+          application/json:
+
+            schema:
+
+              $ref: '#/components/schemas/PagamentoAtualizacao'
+
+      responses:
+
+        '200':
+          description: Pagamento atualizado
+
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pagamento'
+
+        '400':
+          description: ID do pagamento nao informado
+
+        '404':
+          description: Pagamento nao encontrado
+
+    delete:
+
+      summary: Remove um pagamento
+
+      parameters:
+
+        - name: id
+          in: path
+          required: true
+
+          schema:
+            type: integer
+
+      responses:
+
+        '200':
+          description: Pagamento removido
+
+        '400':
+          description: ID do pagamento nao informado
+
+        '404':
+          description: Pagamento nao encontrado
+
+components:
+
+  schemas:
+
+    Pagamento:
+
+      type: object
+
+      properties:
+
+        id:
+          type: integer
+          example: 1
+
+        pedido:
+          type: integer
+          example: 1234
+
+        nome_cliente:
+          type: string
+          example: Joao Silva
+
+        forma_pagamento:
+          type: string
+          enum:
+            - pix
+            - cartao
+            - dinheiro
+          example: pix
+
+        valor:
+          type: number
+          format: float
+          example: 25.9
+
+        status:
+          type: string
+          enum:
+            - aprovado
+            - pendente
+            - recusado
+          example: aprovado
+
+        data_pagamento:
+          type: string
+          format: date-time
+          example: '2026-06-22T08:00:00-03:00'
+
+        atualizado_em:
+          type: string
+          format: date-time
+          example: '2026-06-23T17:38:24-03:00'
+
+        entrega_url:
+          type: string
+          example: http://localhost/tp_microservicos/index.php?pagamento=1&nome=Joao+Silva
+
+    PagamentoEntrada:
+
+      type: object
+
+      required:
+        - pedido
+        - forma_pagamento
+        - valor
+
+      properties:
+
+        pedido:
+          type: integer
+          example: 1234
+
+        nome_cliente:
+          type: string
+          example: Joao Silva
+
+        forma_pagamento:
+          type: string
+          enum:
+            - pix
+            - cartao
+            - dinheiro
+          example: pix
+
+        valor:
+          type: number
+          format: float
+          example: 25.9
+
+        status:
+          type: string
+          enum:
+            - aprovado
+            - pendente
+            - recusado
+          example: aprovado
+
+        entrega_url_base:
+          type: string
+          example: http://localhost/tp_microservicos/index.php
+
+    PagamentoAtualizacao:
+
+      type: object
+
+      properties:
+
+        nome_cliente:
+          type: string
+          example: Joao Silva
+
+        forma_pagamento:
+          type: string
+          enum:
+            - pix
+            - cartao
+            - dinheiro
+          example: cartao
+
+        valor:
+          type: number
+          format: float
+          example: 30
+
+        status:
+          type: string
+          enum:
+            - aprovado
+            - pendente
+            - recusado
+          example: aprovado
+
+  securitySchemes:
+
+    bearerAuth:
+
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
