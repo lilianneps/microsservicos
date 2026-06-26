@@ -1,16 +1,16 @@
-# 💻 Nome do Software
+# 💻 Lili pay
 
-> Uma descrição curta e clara de uma ou duas linhas sobre o que o software faz, qual problema ele resolve e para quem ele se destina.
+> API de pagamentos em PHP para atividade de microsserviços. O sistema permite cadastrar, listar, consultar, atualizar e remover pagamentos, salvando os dados em um arquivo JSON local.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
 Liste as principais linguagens, frameworks e ferramentas que sustentam o projeto:
-* **Backend:** Node.js (Express), Python (Django)
-* **Frontend:** React, Tailwind CSS
-* **Banco de Dados:** PostgreSQL, Redis
-* **Infraestrutura:** Docker, AWS (S3, EC2)
+* **Backend:** PHP
+* **Frontend:** HTML, CSS e JavaScript
+* **Banco de Dados:** Arquivo JSON (`db.json`)
+* **Infraestrutura:** Servidor embutido do PHP
 
 ---
 
@@ -21,38 +21,43 @@ Siga estas instruções para obter uma cópia do projeto e executá-lo em sua m�
 ### Pré-requisitos
 O que você precisa instalar antes de rodar o projeto:
 * Git
-* [Linguagem/Gerenciador de pacotes, ex: Node.js v18+ / npm]
-* [Banco de dados local ou Docker]
+* XAMPP ou PHP instalado localmente
+* Node.js / npm
 
 ### Instalação e Configuração
 
 1. **Clone o repositório:**
    ```bash
    git clone https://github.com
-   cd nome-do-projeto
+   cd microsservicos
    ```
 
 2. **Configure as variáveis de ambiente:**
-   Copie o arquivo de exemplo e preencha com as suas credenciais locais:
+   O projeto não utiliza arquivo `.env`; as configurações principais estão no `index.php`, como a URL padrão do serviço de entregas.
    ```bash
-   cp .env.example .env
+   # DEFAULT_ENTREGA_URL = 'http://localhost/tp_microservicos/index.php'
    ```
 
 3. **Instale as dependências:**
    ```bash
-   npm install  # Ou o comando correspondente da sua tecnologia (pip, mvn, composer, etc)
+   npm install
    ```
 
 4. **Execute as migrações do banco de dados (se houver):**
    ```bash
-   npm run db:migrate
+   # Não há migrações. Os dados são gravados diretamente no arquivo db.json.
    ```
 
 5. **Inicie o servidor de desenvolvimento:**
    ```bash
-   npm run dev
+   npm start
    ```
-   O sistema estará disponível em: `http://localhost:3000`
+   O sistema estará disponível em: `http://localhost:8000`
+
+   Se estiver usando o XAMPP, coloque a pasta do projeto dentro de `htdocs`, inicie o Apache pelo painel do XAMPP e acesse pelo navegador:
+   ```bash
+   http://localhost/microsservicos
+   ```
 
 ---
 
@@ -61,8 +66,7 @@ O que você precisa instalar antes de rodar o projeto:
 Instruções sobre como rodar os testes automatizados do sistema:
 
 ```bash
-npm run test        # Executa a suíte de testes unitários
-npm run test:cov    # Gera o relatório de cobertura de código
+# Não há scripts de teste configurados no package.json.
 ```
 
 ---
@@ -72,14 +76,13 @@ npm run test:cov    # Gera o relatório de cobertura de código
 Uma visão macro de como os arquivos estão organizados (opcional, mas altamente recomendado):
 
 ```text
-├── src/
-│   ├── config/      # Configurações globais e variáveis de ambiente
-│   ├── controllers/ # Lógica de controle de rotas/fluxo
-│   ├── models/      # Modelagem de dados e regras de negócio
-│   └── views/       # Interface do usuário (se aplicável)
-├── tests/           # Testes automatizados (Unitários/Integração)
-├── .env.example     # Modelo de variáveis de ambiente
-└── README.md        # Esta documentação
+├── index.php         # Tela de cadastro e endpoints da API de pagamentos
+├── script.js         # Captura o formulário e envia os dados para a API
+├── style.css         # Estilos da interface
+├── db.json           # Base de dados local com os pagamentos
+├── package.json      # Metadados e script de inicialização do projeto
+├── package-lock.json # Controle de versão das dependências npm
+└── README.md         # Esta documentação
 ```
 
 ---
