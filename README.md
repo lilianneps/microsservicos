@@ -1,4 +1,4 @@
-# 💻 Lili pay
+# 💻 Lili´s Pay
 
 > API de pagamentos em PHP para atividade de microsserviços. O sistema permite cadastrar, listar, consultar, atualizar e remover pagamentos, salvando os dados em um arquivo JSON local.
 
